@@ -18,4 +18,8 @@ export class CustomerService {
     return this.httpClient.get<Customer[]>('api/Customer/GetAll');
   }
 
+  getCustomer(customerId: string): Observable<Customer> {
+    return this.httpClient.get<Customer>('api/Customer/GetCustomer/' + customerId);
+  }
+
 }

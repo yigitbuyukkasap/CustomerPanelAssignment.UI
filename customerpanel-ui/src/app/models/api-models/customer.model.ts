@@ -1,4 +1,4 @@
-import { Address } from "./address.model";
+import { Address } from "../ui-models/address.model";
 
 export interface Customer{
   id: string,

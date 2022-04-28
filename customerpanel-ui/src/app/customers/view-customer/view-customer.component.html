@@ -1,0 +1,69 @@
+<div class="page-header">
+  <div class="container">
+    <h1>{{ customerName }}</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row top-row">
+    <div class="col-xs-12 row end-xs">
+      <a [routerLink]="['/customer']" color="primary" mat-raised-button>
+        <mat-icon>chevron_left</mat-icon>
+        Geri Don
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <!-- musteri bilgiler -->
+      <form #customerDetailsForm="ngForm">
+        <div class="row">
+          <div class="col-xs-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Isim</mat-label>
+              <input type="text"  matInput [(ngModel)]="customer.name" name="name">
+            </mat-form-field>
+          </div>
+
+          <div class="col-xs-6">
+            <mat-form-field  appearance="outline">
+              <mat-label>Telefon Numarasi</mat-label>
+              <input type="text"  matInput [(ngModel)]="customer.phoneNumber" name="phoneNumber">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <mat-form-field  appearance="outline">
+              <mat-label>Aciklama</mat-label>
+              <textarea   cols="10" rows="4" matInput [(ngModel)]="customer.description" name="description"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <mat-form-field  appearance="outline">
+              <mat-label>Fiziksel Adres</mat-label>
+              <textarea  id="" cols="20" rows="6" matInput [(ngModel)]="customer.address.physicalAddress" name="physicalAddress"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <mat-form-field  appearance="outline">
+              <mat-label>Posta Kodu</mat-label>
+              <input type="number"  matInput [(ngModel)]="customer.address.postalAddress" name="postalAddress">
+            </mat-form-field>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <div class="col-xs-6">
+      <!-- profil resim -->
+    </div>
+  </div>
+</div>

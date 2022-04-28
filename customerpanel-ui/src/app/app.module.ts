@@ -54,6 +54,7 @@ import {  HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { ViewCustomerComponent } from './customers/view-customer/view-customer.component';
 
 export function tokenGetter(){
   return localStorage.getItem('customerpanel_ui');
@@ -65,7 +66,8 @@ export function tokenGetter(){
     TopNavComponent,
     CustomersComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ViewCustomerComponent
   ],
   imports: [
     FormsModule,
