@@ -1,4 +1,4 @@
-import { registerLocaleData } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -13,6 +13,8 @@ import { CustomerService } from './customer.service';
 })
 export class CustomersComponent implements OnInit {
 
+
+
   customers: Customer[] = [];
 
   displayedColumns: string[] = ['name', 'description', 'phoneNumber'];
@@ -20,11 +22,22 @@ export class CustomersComponent implements OnInit {
   @ViewChild(MatPaginator) matPaginator!: MatPaginator;
   @ViewChild(MatSort) matSort!: MatSort;
   filterString = '';
+  message ='Giris Yapmadiniz';
 
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private customerService: CustomerService,private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.http.get('https://localhost:44380/Customer/GetAll').subscribe(
+      (r: any) =>{
+        console.log(r);
+        this.message = `Hi ${r.name}`;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+
     // Fetch The Customers
     this.customerService
       .getAllCustomers()

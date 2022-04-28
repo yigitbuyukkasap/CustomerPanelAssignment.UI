@@ -1,0 +1,33 @@
+<div class="page-header">
+  <div class="container">
+    <h1>Uye Ol</h1>
+  </div>
+</div>
+<form [formGroup]="form" (submit)="submit()">
+  <div class="container mt-1">
+    <div class="LoginForm">
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Isim</mat-label>
+          <input type="text" formControlName="name" matInput placeholder="Isim">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>EMail</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="EMail">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Sifre</mat-label>
+          <input matInput type="password" formControlName="password" placeholder="Sifre">
+        </mat-form-field>
+      </p>
+      <p>
+        <button mat-flat-button type="submit" color="primary">Uye Ol</button>
+      </p>
+
+    </div>
+  </div>
+</form>

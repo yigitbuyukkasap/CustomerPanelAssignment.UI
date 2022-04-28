@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/login/login.service';
 
 @Component({
   selector: 'app-top-nav',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopNavComponent implements OnInit {
 
-  constructor() { }
+  auth = false;
+
+  constructor(private login: LoginService, private htpp: HttpClient) { }
 
   ngOnInit(): void {
+    this.auth = this.login.IsLoggedIn();
+  }
+
+  logOut(): void{
+    /*this.htpp.post.
+    this.auth = false;*/
   }
 
 }

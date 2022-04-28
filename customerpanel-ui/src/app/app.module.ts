@@ -51,16 +51,25 @@ import { TopNavComponent } from './layout/top-nav/top-nav.component';
 import { CustomersComponent } from './customers/customers.component';
 //Http Client Module
 import {  HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+
+export function tokenGetter(){
+  return localStorage.getItem('customerpanel_ui');
+}
 
 @NgModule({
   declarations: [
     AppComponent,
     TopNavComponent,
-    CustomersComponent
+    CustomersComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -100,12 +109,14 @@ import { FormsModule } from '@angular/forms';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [],
+  providers: [
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
