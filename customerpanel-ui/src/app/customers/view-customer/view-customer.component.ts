@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Route } from '@angular/router';
 import { AddressService } from 'src/app/address/address.service';
+import { UpdateCustomerRequest } from 'src/app/models/api-models/update-customer-request.model';
 import { Customer } from 'src/app/models/ui-models/customer.model';
 import { CustomerService } from '../customer.service';
 
@@ -30,7 +32,8 @@ export class ViewCustomerComponent implements OnInit {
   constructor(
      private readonly customerService: CustomerService,
      private route: ActivatedRoute,
-     private addressService: AddressService) { }
+     private addressService: AddressService,
+     private snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(
@@ -56,6 +59,20 @@ export class ViewCustomerComponent implements OnInit {
             err => console.log('error response'));
       }
     );
+  }
+
+  onUpdate(): void{
+    this.customerService.updateCustomer(this.customer.id, this.customer)
+      .subscribe(
+        r => {
+          this.snackbar.open('Musteri basarili sekilde guncelendi.', undefined, { duration: 2000 });
+        },
+        err => {
+          this.snackbar.open('Musteri guncelleme basarisiz.', undefined, { duration: 2000 });
+
+        }
+      );
+
   }
 
 }

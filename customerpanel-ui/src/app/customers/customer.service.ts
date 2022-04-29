@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Customer } from '../models/api-models/customer.model';
+import { UpdateCustomerRequest } from '../models/api-models/update-customer-request.model';
 //import { environment } from './../environments/environment';
 
 @Injectable({
@@ -17,6 +18,20 @@ export class CustomerService {
 
   getCustomer(customerId: string): Observable<Customer> {
     return this.httpClient.get<Customer>('api/Customer/GetCustomer/' + customerId);
+  }
+
+  updateCustomer(customerId: string, customer: Customer): Observable<Customer>{
+    const updateCustomerRequest: UpdateCustomerRequest = {
+      name: customer.name,
+      description: customer.description,
+      phoneNumber: customer.phoneNumber,
+      physicalAddress: customer.address.physicalAddress,
+      postalAddress: customer.address.postalAddress.toString(),
+    }
+
+    console.log(updateCustomerRequest);
+
+    return this.httpClient.put<Customer>('api/Customer/UpdateCustomer/' +  customerId, updateCustomerRequest);
   }
 
 }
