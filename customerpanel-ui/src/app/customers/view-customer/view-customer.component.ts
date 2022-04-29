@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AddressService } from 'src/app/address/address.service';
 import { UpdateCustomerRequest } from 'src/app/models/api-models/update-customer-request.model';
 import { Customer } from 'src/app/models/ui-models/customer.model';
@@ -33,7 +33,8 @@ export class ViewCustomerComponent implements OnInit {
      private readonly customerService: CustomerService,
      private route: ActivatedRoute,
      private addressService: AddressService,
-     private snackbar: MatSnackBar) { }
+     private snackbar: MatSnackBar,
+     private router: Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(
@@ -69,6 +70,20 @@ export class ViewCustomerComponent implements OnInit {
         },
         err => {
           this.snackbar.open('Musteri guncelleme basarisiz.', undefined, { duration: 2000 });
+
+        }
+      );
+
+  }
+  onDelete(): void{
+    this.customerService.deleteCustomer(this.customer.id)
+      .subscribe(
+        r => {
+          this.snackbar.open('Musteri Silindi', undefined, { duration: 2000 });
+          setTimeout(()=>  this.router.navigateByUrl('customers'), 2000 );
+        },
+        err => {
+          this.snackbar.open('Musteri silme basarisiz', undefined, { duration: 2000 });
 
         }
       );

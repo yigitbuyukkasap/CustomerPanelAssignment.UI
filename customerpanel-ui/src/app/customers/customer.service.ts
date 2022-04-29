@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Customer } from '../models/api-models/customer.model';
@@ -32,6 +32,10 @@ export class CustomerService {
     console.log(updateCustomerRequest);
 
     return this.httpClient.put<Customer>('api/Customer/UpdateCustomer/' +  customerId, updateCustomerRequest);
+  }
+
+  deleteCustomer(customerId: string): Observable<Object> {
+    return this.httpClient.delete('api/Customer/DeleteCustomer/' + customerId);
   }
 
 }
