@@ -9,9 +9,6 @@ import { Customer } from '../models/api-models/customer.model';
 })
 export class CustomerService {
 
-
-
-
   constructor(private httpClient: HttpClient) { }
 
   getAllCustomers(): Observable<Customer[]> {
