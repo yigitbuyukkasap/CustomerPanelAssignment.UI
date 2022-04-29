@@ -1,13 +1,13 @@
 <div class="page-header">
   <div class="container">
-    <h1> Musteri : {{ customer.name }}</h1>
+    <h1> {{ header }}</h1>
   </div>
 </div>
 
 <div class="container">
   <div class="row top-row">
     <div class="col-xs-12 row end-xs">
-      <a [routerLink]="['/customer']" color="primary" mat-raised-button>
+      <a [routerLink]="['/customers']" color="primary" mat-raised-button>
         <mat-icon>chevron_left</mat-icon>
         Geri Don
       </a>
@@ -61,12 +61,18 @@
         </div>
 
         <div class="row">
+          <!-- Existing Customer -->
           <div class="col-xs-12">
-            <div class="row between-xs">
+            <div class="row between-xs" *ngIf="!isNewCustomer">
               <button mat-raised-button color="primary" (click)="onUpdate()"> Guncelle</button>
               <button mat-raised-button color="warn" (click)="onDelete()"> Sil</button>
             </div>
+            <!-- New Customer -->
+            <div class="row between-xs" *ngIf="isNewCustomer">
+              <button mat-raised-button color="primary" (click)="onAdd()"> Yeni Ekle</button>
+            </div>
           </div>
+
         </div>
       </form>
     </div>
