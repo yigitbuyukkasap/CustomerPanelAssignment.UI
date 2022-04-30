@@ -50,7 +50,7 @@ export class EmployeeComponent implements OnInit {
         if (this.matSort) this.dataSource.sort = this.matSort;
       },
       (errorResponse) =>
-        this.snackbar.open('Musterilerin getirilmesinde hata.', undefined, {
+        this.snackbar.open('Musterilerin getirilmesinde hata. ', undefined, {
           duration: 2000,
           verticalPosition: 'top',
         })

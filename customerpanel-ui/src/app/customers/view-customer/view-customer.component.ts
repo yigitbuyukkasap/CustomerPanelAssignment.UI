@@ -29,6 +29,7 @@ export class ViewCustomerComponent implements OnInit {
   };
   isNewCustomer = false;
   header = '';
+  displayImageUrl = '';
 
   constructor(
     private readonly customerService: CustomerService,
@@ -48,13 +49,14 @@ export class ViewCustomerComponent implements OnInit {
           // Route Add Iceriyorsa -> new Customer()
           this.isNewCustomer = true;
           this.header = 'Yeni Musteri Ekle';
+          this.setImage();
         } else {
           this.isNewCustomer = false;
           // Update ExistingCustomer Fonksiyonu
           this.customerService.getCustomer(this.customerId).subscribe(
             (r) => {
               this.customer = r;
-
+              this.setImage();
               // Customerin Addresinin Getirilmesi
               this.addressService
                 .getCustomerAddress(this.customer.id)
@@ -71,7 +73,9 @@ export class ViewCustomerComponent implements OnInit {
                   postalAddress: '',
                 };
             },
-            (err) => console.log('error response')
+            (err) => {
+              this.setImage();
+            }
           );
         }
     });
@@ -120,11 +124,39 @@ export class ViewCustomerComponent implements OnInit {
         setTimeout(() => this.router.navigateByUrl(`customer/${r.id}`), 2000);
       },
       (err) => {
-        this.snackbar.open('Musteri Ekleme Basarisiz', undefined, {
-          duration: 2000,
-          verticalPosition: 'top',
-        });
+        this.snackbar.open(
+          'Musteri Ekleme Basarisiz Hata : Lutfen Bos Alanlari Dogru Sekilde Doldurunuz ',
+          undefined,
+          {
+            duration: 2000,
+            verticalPosition: 'top',
+          }
+        );
       }
     );
+  }
+
+   uploadImage(event: any): void {
+    if (this.customerId) {
+      const file: File = event.target.files[0];
+      this.customerService.uploadImage(this.customer.id, file).subscribe(
+        (r) => {
+          this.customer.imageUrl = r;
+          this.setImage();
+          this.snackbar.open('Resim guncellend', undefined, {
+            duration: 2000,
+            verticalPosition: 'top',
+          });
+        },
+        (err) => {}
+      );
+    }
+  }
+  private setImage(): void {
+    if (this.customer.imageUrl) {
+      this.displayImageUrl = this.customerService.getImagePath(this.customer.imageUrl);
+    } else {
+      this.displayImageUrl = '/assets/images.png';
+    }
   }
 }

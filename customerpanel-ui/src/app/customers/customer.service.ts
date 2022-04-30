@@ -55,4 +55,17 @@ export class CustomerService {
       addCustomerRequest
     );
   }
+
+  uploadImage(customerId: string, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('image', file);
+    return this.httpClient.post('api/Customer/UploadImage/' + customerId, formData, {
+      responseType: 'text',
+    });
+  }
+
+  getImagePath(relativePath: string){
+    return`api/${relativePath}`;
+
+  }
 }

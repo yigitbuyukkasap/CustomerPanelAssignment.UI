@@ -15,13 +15,15 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>EMail</mat-label>
-          <input matInput type="email" formControlName="email" placeholder="EMail">
+          <input matInput type="email" formControlName="email" placeholder="EMail" required>
+          <mat-error>Bos birakilamaz</mat-error>
         </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Sifre</mat-label>
-          <input matInput type="password" formControlName="password" placeholder="Sifre">
+          <input matInput type="password" formControlName="password" placeholder="Sifre" required>
+          <mat-error>Bos birakilamaz</mat-error>
         </mat-form-field>
       </p>
       <p>

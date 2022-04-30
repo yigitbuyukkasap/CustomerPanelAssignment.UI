@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
+    private snackbar: MatSnackBar,
     private router: Router
   ) { }
 
@@ -31,6 +33,11 @@ export class LoginComponent implements OnInit {
     this.loginService.postLogin(this.form)
     .subscribe(response =>{
       this.router.navigate(['']).then(() => window.location.reload());
+    }, err =>{
+      this.snackbar.open('Giris Yapilamadi Lutfen Dogru Giriniz. ', undefined, {
+        duration: 2000,
+        verticalPosition: 'top',
+      })
     });
   }
 

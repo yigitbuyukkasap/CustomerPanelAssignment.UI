@@ -72,13 +72,13 @@ export class ViewEmployeeComponent implements OnInit {
       .subscribe(
         (r) => {
           this.snackbar.open(
-            'Musteri basarili sekilde guncelendi.',
+            'Musteri basarili sekilde guncelendi. ',
             undefined,
             { duration: 2000 }
           );
         },
         (err) => {
-          this.snackbar.open('Calisan guncelleme basarisiz.', undefined, {
+          this.snackbar.open('Calisan guncelleme basarisiz. Lutfen Bos Alanlari Dogru Sekilde Doldurunuz', undefined, {
             duration: 2000,
           });
         }
@@ -102,7 +102,7 @@ export class ViewEmployeeComponent implements OnInit {
   onAdd(): void {
     this.employeeService.addEmployee(this.employee).subscribe(
       (r) => {
-        this.snackbar.open('Calisan Basarili Sekilde Eklendi', undefined, {
+        this.snackbar.open('Calisan Basarili Sekilde Eklendi Lutfen Bos Alanlari Dogru Sekilde Doldurunuz', undefined, {
           duration: 2000,
           verticalPosition: 'top',
         });

@@ -1,12 +1,12 @@
 <div class="page-header">
   <div class="container">
-    <h1>{{ header }} : {{ employeeCustomerName }} </h1>
+    <h1>{{ header }}  {{ employee.name }}</h1>
   </div>
 </div>
 
 <div class="container">
   <div class="row top-row">
-    <div class="col-xs-12 row end-xs">
+    <div class="col-xs-12 row end-xs mt-1">
       <a [routerLink]="['/employee']" color="primary" mat-raised-button>
         <mat-icon>chevron_left</mat-icon>
         Geri Don
@@ -26,8 +26,10 @@
                 type="text"
                 matInput
                 [(ngModel)]="employee.name"
+                required
                 name="name"
               />
+              <mat-error>Lutfen isimi doldurunuz</mat-error>
             </mat-form-field>
           </div>
 
@@ -39,7 +41,9 @@
                 matInput
                 [(ngModel)]="employee.lastName"
                 name="lastName"
+                required
               />
+              <mat-error>Lutfen Soyadi Doldurunuz</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -49,11 +53,16 @@
             <mat-form-field appearance="outline">
               <mat-label>E mail</mat-label>
               <input
-                type="text"
+                type="email"
                 matInput
                 [(ngModel)]="employee.email"
+                required
                 name="email"
+                required
               />
+              <mat-error>
+                E-mail dogru giriniz
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-xs-6">
@@ -74,8 +83,11 @@
             <mat-form-field appearance="outline">
               <mat-label>Calistigi Musteri</mat-label>
               <mat-select [(ngModel)]="employee.customerId" name="customer">
-                <mat-option *ngFor="let customer of customerList" [value]="customer.id">
-                  {{customer.name}}
+                <mat-option
+                  *ngFor="let customer of customerList"
+                  [value]="customer.id"
+                >
+                  {{ customer.name }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -85,7 +97,7 @@
         <div class="row">
           <!-- Existing employee -->
           <div class="col-xs-12">
-            <div class="row between-xs" *ngIf="!isNewEmployee">
+            <div class="row ml-1" *ngIf="!isNewEmployee">
               <button mat-raised-button color="primary" (click)="onUpdate()">
                 Guncelle
               </button>

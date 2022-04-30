@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
           });
         this.router.navigate(['/login']);
       }, err =>{
-        this.snackbar.open('Uye Olma Basarisiz Tekrar Deneyiniz', undefined, {
+        this.snackbar.open('Uye Olma Basarisiz Tekrar Deneyiniz : Bos Alanlari doldurun Veya Dogru EPosta Adresi Giriniz', undefined, {
           duration: 2000,
           verticalPosition: 'top',
         });

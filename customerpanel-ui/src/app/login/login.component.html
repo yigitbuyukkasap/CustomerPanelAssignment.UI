@@ -9,13 +9,17 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>EMail</mat-label>
-          <input matInput formControlName="email" type="email" placeholder="EMail">
+          <input matInput formControlName="email" type="email" placeholder="EMail" required>
+          <mat-error>
+            Bos birakilamaz
+          </mat-error>
         </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Sifre</mat-label>
-          <input matInput formControlName="password" type="password" placeholder="Sifre">
+          <input matInput formControlName="password" type="password" placeholder="Sifre" required>
+          <mat-error>Bos birakilamaz</mat-error>
         </mat-form-field>
       </p>
       <p>
