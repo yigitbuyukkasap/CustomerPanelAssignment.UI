@@ -16,3 +16,6 @@ table{
 .search-input:focus{
   border: 1px solid #AAA;
 }
+.alink{
+  text-decoration: none;
+}

@@ -55,6 +55,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ViewCustomerComponent } from './customers/view-customer/view-customer.component';
+import { AuthGuard } from './guard/auth.guard';
 
 export function tokenGetter(){
   return localStorage.getItem('customerpanel_ui');
@@ -117,7 +118,7 @@ export function tokenGetter(){
     CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [
-
+    [AuthGuard]
   ],
   bootstrap: [AppComponent]
 })

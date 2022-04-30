@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   submit(): void{
     this.loginService.postLogin(this.form)
     .subscribe(response =>{
-      this.router.navigate(['/customers']);
+      this.router.navigate(['']).then(() => window.location.reload());
     });
   }
 

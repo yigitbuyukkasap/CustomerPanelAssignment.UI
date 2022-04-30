@@ -47,9 +47,11 @@ export class CustomersComponent implements OnInit {
         if (this.matPaginator) this.dataSource.paginator = this.matPaginator;
         if (this.matSort) this.dataSource.sort = this.matSort;
       },
-      (errorResponse) => this.snackbar.open(
-        'Musterilerin getirilmesinde hata.',
-        undefined, { duration: 2000 })
+      (errorResponse) =>
+        this.snackbar.open('Musterilerin getirilmesinde hata.', undefined, {
+          duration: 2000,
+          verticalPosition: 'top',
+        })
     );
   }
 

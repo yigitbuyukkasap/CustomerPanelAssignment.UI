@@ -6,7 +6,7 @@
     <a routerLink="/customers" mat-raised-button class="ml-1" *ngIf="auth">Musteriler</a>
     <a routerLink="/login" mat-raised-button class="ml-1" *ngIf="!auth">Giris Yap</a>
     <a routerLink="/register" mat-raised-button class="ml-1" *ngIf="!auth">Uye Ol</a>
-    <a routerLink="/login" mat-raised-button class="ml-1" (click)="logOut()" *ngIf="auth">Cikis Yap</a>
+    <a routerLink="/login" mat-raised-button class="ml-1" color="warn" style="float: right;margin-top:10px;" (click)="logOut()" *ngIf="auth">Cikis Yap</a>
   </div>
 </mat-toolbar>
 

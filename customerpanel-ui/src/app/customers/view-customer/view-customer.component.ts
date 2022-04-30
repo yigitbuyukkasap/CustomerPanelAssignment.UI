@@ -104,6 +104,7 @@ export class ViewCustomerComponent implements OnInit {
       (err) => {
         this.snackbar.open('Musteri silme basarisiz', undefined, {
           duration: 2000,
+          verticalPosition: 'top',
         });
       }
     );
@@ -114,12 +115,14 @@ export class ViewCustomerComponent implements OnInit {
       (r) => {
         this.snackbar.open('Musteri Basarili Sekilde Eklendi', undefined, {
           duration: 2000,
+          verticalPosition: 'top',
         });
         setTimeout(() => this.router.navigateByUrl(`customer/${r.id}`), 2000);
       },
       (err) => {
         this.snackbar.open('Musteri Ekleme Basarisiz', undefined, {
           duration: 2000,
+          verticalPosition: 'top',
         });
       }
     );

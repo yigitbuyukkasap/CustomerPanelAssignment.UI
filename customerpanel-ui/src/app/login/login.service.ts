@@ -23,5 +23,6 @@ export class LoginService {
   IsLoggedIn(){
     return !!localStorage.getItem('customerpanel_ui');
   }
+  
 
 }
