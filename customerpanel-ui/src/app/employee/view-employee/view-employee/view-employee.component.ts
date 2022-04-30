@@ -102,7 +102,7 @@ export class ViewEmployeeComponent implements OnInit {
   onAdd(): void {
     this.employeeService.addEmployee(this.employee).subscribe(
       (r) => {
-        this.snackbar.open('Calisan Basarili Sekilde Eklendi Lutfen Bos Alanlari Dogru Sekilde Doldurunuz', undefined, {
+        this.snackbar.open('Calisan Basarili Sekilde Eklendi', undefined, {
           duration: 2000,
           verticalPosition: 'top',
         });

@@ -13,8 +13,6 @@ export class TopNavComponent implements OnInit {
   constructor(private login: LoginService, private htpp: HttpClient) {}
 
   ngOnInit(): void {
-    console.log("amk");
-
     this.auth = this.login.IsLoggedIn();
   }
 

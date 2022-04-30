@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   submit(): void{
     this.loginService.postLogin(this.form)
     .subscribe(response =>{
-      this.router.navigate(['']).then(() => window.location.reload());
+      this.router.navigate(['/customers']).then(() => window.location.reload());
     }, err =>{
       this.snackbar.open('Giris Yapilamadi Lutfen Dogru Giriniz. ', undefined, {
         duration: 2000,
