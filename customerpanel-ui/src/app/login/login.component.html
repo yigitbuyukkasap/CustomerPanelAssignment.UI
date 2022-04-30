@@ -9,9 +9,9 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>EMail</mat-label>
-          <input matInput formControlName="email" type="email" placeholder="EMail" required>
+          <input matInput formControlName="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="EMail" required>
           <mat-error>
-            Bos birakilamaz
+            Duzgun e-mail adresi giriniz
           </mat-error>
         </mat-form-field>
       </p>

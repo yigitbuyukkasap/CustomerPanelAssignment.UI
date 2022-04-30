@@ -1,6 +1,6 @@
 <div class="page-header">
   <div class="container">
-    <h1>{{ header }}  {{ employee.name }}</h1>
+    <h1>{{ header }} {{ employee.name }}</h1>
   </div>
 </div>
 
@@ -17,7 +17,7 @@
   <div class="row">
     <div class="col-xs-6">
       <!-- musteri bilgiler -->
-      <form #customerDetailsForm="ngForm">
+      <form #employeeDetailsForm="ngForm">
         <div class="row">
           <div class="col-xs-6">
             <mat-form-field appearance="outline">
@@ -54,15 +54,14 @@
               <mat-label>E mail</mat-label>
               <input
                 type="email"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                 matInput
                 [(ngModel)]="employee.email"
                 required
                 name="email"
                 required
               />
-              <mat-error>
-                E-mail dogru giriniz
-              </mat-error>
+              <mat-error> E-mail dogru giriniz </mat-error>
             </mat-form-field>
           </div>
           <div class="col-xs-6">
@@ -70,10 +69,12 @@
               <mat-label>Telefon Numarasi</mat-label>
               <input
                 type="text"
+                pattern="[5][0-9]{10}"
                 matInput
                 [(ngModel)]="employee.phoneNumber"
                 name="phoneNumber"
               />
+              <mat-error>5 ile baslamali 9digit olmali</mat-error>
             </mat-form-field>
           </div>
         </div>

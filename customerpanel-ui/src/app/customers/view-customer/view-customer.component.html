@@ -1,6 +1,6 @@
 <div class="page-header">
   <div class="container">
-    <h1> {{ header }}</h1>
+    <h1>{{ header }}</h1>
   </div>
 </div>
 
@@ -22,44 +22,73 @@
           <div class="col-xs-6">
             <mat-form-field appearance="outline">
               <mat-label>Isim</mat-label>
-              <input type="text"  matInput [(ngModel)]="customer.name" name="name" required>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="customer.name"
+                name="name"
+                required
+              />
               <mat-error>Bos Gecilmez</mat-error>
             </mat-form-field>
           </div>
 
           <div class="col-xs-6">
-            <mat-form-field  appearance="outline">
+            <mat-form-field appearance="outline">
               <mat-label>Telefon Numarasi</mat-label>
-              <input type="phone"  matInput [(ngModel)]="customer.phoneNumber" name="phoneNumber" required>
-              <mat-error>
-                Duzgun Telefon Giriniz
-              </mat-error>
+              <input
+                type="text"
+                pattern="[5][0-9]{10}"
+                matInput
+                [(ngModel)]="customer.phoneNumber"
+                name="phoneNumber"
+                required
+              />
+              <mat-error> 5 ile baslamali 9digit olmali </mat-error>
             </mat-form-field>
           </div>
         </div>
 
         <div class="row">
           <div class="col-xs-12">
-            <mat-form-field  appearance="outline">
+            <mat-form-field appearance="outline">
               <mat-label>Aciklama</mat-label>
-              <textarea   cols="10" rows="4" matInput [(ngModel)]="customer.description" name="description"></textarea>
+              <textarea
+                cols="10"
+                rows="4"
+                matInput
+                [(ngModel)]="customer.description"
+                name="description"
+              ></textarea>
             </mat-form-field>
           </div>
         </div>
 
         <div class="row">
           <div class="col-xs-12">
-            <mat-form-field  appearance="outline">
+            <mat-form-field appearance="outline">
               <mat-label>Fiziksel Adres</mat-label>
-              <textarea  id="" cols="20" rows="6" matInput [(ngModel)]="customer.address.physicalAddress" name="physicalAddress"></textarea>
+              <textarea
+                id=""
+                cols="20"
+                rows="6"
+                matInput
+                [(ngModel)]="customer.address.physicalAddress"
+                name="physicalAddress"
+              ></textarea>
             </mat-form-field>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-12">
-            <mat-form-field  appearance="outline">
+            <mat-form-field appearance="outline">
               <mat-label>Posta Kodu</mat-label>
-              <input type="number"  matInput [(ngModel)]="customer.address.postalAddress" name="postalAddress">
+              <input
+                type="number"
+                matInput
+                [(ngModel)]="customer.address.postalAddress"
+                name="postalAddress"
+              />
             </mat-form-field>
           </div>
         </div>
@@ -68,15 +97,20 @@
           <!-- Existing Customer -->
           <div class="col-xs-12">
             <div class="row between-xs" *ngIf="!isNewCustomer">
-              <button mat-raised-button color="primary" (click)="onUpdate()"> Guncelle</button>
-              <button mat-raised-button color="warn" (click)="onDelete()"> Sil</button>
+              <button mat-raised-button color="primary" (click)="onUpdate()">
+                Guncelle
+              </button>
+              <button mat-raised-button color="warn" (click)="onDelete()">
+                Sil
+              </button>
             </div>
             <!-- New Customer -->
             <div class="row between-xs" *ngIf="isNewCustomer">
-              <button mat-raised-button color="primary" (click)="onAdd()"> Yeni Ekle</button>
+              <button mat-raised-button color="primary" (click)="onAdd()">
+                Yeni Ekle
+              </button>
             </div>
           </div>
-
         </div>
       </form>
     </div>
@@ -84,13 +118,24 @@
       <!--  resim -->
       <div class="row center-xs">
         <div class="image-container">
-          <img [src]="displayImageUrl" alt="Customer Image">
+          <img [src]="displayImageUrl" alt="Customer Image" />
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12 row center-xs mt-1" *ngIf="!isNewCustomer">
-          <input type="file" hidden #imageUpload (change)="uploadImage($event)">
-          <button mat-raised-button color="primary" (click)="imageUpload.click()">Resim Degistir</button>
+          <input
+            type="file"
+            hidden
+            #imageUpload
+            (change)="uploadImage($event)"
+          />
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="imageUpload.click()"
+          >
+            Resim Degistir
+          </button>
         </div>
       </div>
     </div>

@@ -15,8 +15,8 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>EMail</mat-label>
-          <input matInput type="email" formControlName="email" placeholder="EMail" required>
-          <mat-error>Bos birakilamaz</mat-error>
+          <input matInput type="email" formControlName="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="EMail" required>
+          <mat-error>Duzgun e-mail adresi giriniz</mat-error>
         </mat-form-field>
       </p>
       <p>

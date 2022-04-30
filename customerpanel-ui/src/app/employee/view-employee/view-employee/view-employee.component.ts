@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddressService } from 'src/app/address/address.service';
@@ -29,6 +30,8 @@ export class ViewEmployeeComponent implements OnInit {
   isNewEmployee = false;
   header = '';
 
+  @ViewChild('employeeDetailsForm') employeeDetailsForm?: NgForm;
+
   constructor(
     private readonly employeeService: EmployeeService,
     private route: ActivatedRoute,
@@ -48,8 +51,8 @@ export class ViewEmployeeComponent implements OnInit {
           this.isNewEmployee = true;
           this.header = 'Yeni Calisan Ekle';
           this.customerService
-                .getAllCustomers()
-                .subscribe((r) => (this.customerList = r));
+            .getAllCustomers()
+            .subscribe((r) => (this.customerList = r));
         } else {
           this.isNewEmployee = false;
           // Update Existingemployee Fonksiyonu
@@ -67,22 +70,29 @@ export class ViewEmployeeComponent implements OnInit {
   }
 
   onUpdate(): void {
-    this.employeeService
-      .updateEmployee(this.employee.id, this.employee)
-      .subscribe(
-        (r) => {
-          this.snackbar.open(
-            'Musteri basarili sekilde guncelendi. ',
-            undefined,
-            { duration: 2000 }
-          );
-        },
-        (err) => {
-          this.snackbar.open('Calisan guncelleme basarisiz. Lutfen Bos Alanlari Dogru Sekilde Doldurunuz', undefined, {
-            duration: 2000,
-          });
-        }
-      );
+    if (this.employeeDetailsForm?.form.valid) {
+      this.employeeService
+        .updateEmployee(this.employee.id, this.employee)
+        .subscribe(
+          (r) => {
+            this.snackbar.open(
+              'Musteri basarili sekilde guncelendi. ',
+              undefined,
+              { duration: 2000 }
+            );
+            this.router.navigate(['/employee/',this.employeeId]).then(() => window.location.reload());
+          },
+          (err) => {
+            this.snackbar.open(
+              'Calisan guncelleme basarisiz. Lutfen Bos Alanlari Dogru Sekilde Doldurunuz',
+              undefined,
+              {
+                duration: 2000,
+              }
+            );
+          }
+        );
+    }
   }
   onDelete(): void {
     this.employeeService.deleteEmployee(this.employee.id).subscribe(
@@ -100,20 +110,29 @@ export class ViewEmployeeComponent implements OnInit {
   }
 
   onAdd(): void {
-    this.employeeService.addEmployee(this.employee).subscribe(
-      (r) => {
-        this.snackbar.open('Calisan Basarili Sekilde Eklendi', undefined, {
-          duration: 2000,
-          verticalPosition: 'top',
-        });
-        setTimeout(() => this.router.navigateByUrl(`employee/${r.id}`), 2000);
-      },
-      (err) => {
-        this.snackbar.open('Calisan Ekleme Basarisiz', undefined, {
-          duration: 2000,
-          verticalPosition: 'top',
-        });
-      }
-    );
+    if (this.employeeDetailsForm?.form.valid) {
+      this.employeeService.addEmployee(this.employee).subscribe(
+        (r) => {
+          this.snackbar.open('Calisan Basarili Sekilde Eklendi', undefined, {
+            duration: 2000,
+            verticalPosition: 'top',
+          });
+          setTimeout(() => this.router.navigateByUrl(`employee/${r.id}`), 2000);
+        },
+        (err) => {
+          if (err.status == 404) {
+            this.snackbar.open('Boyle Bir Email Kullanan Calisan Mevcut', undefined, {
+              duration: 2000,
+              verticalPosition: 'top',
+            });
+          } else {
+            this.snackbar.open('Calisan Ekleme Basarisiz', undefined, {
+              duration: 2000,
+              verticalPosition: 'top',
+            });
+          }
+        }
+      );
+    }
   }
 }

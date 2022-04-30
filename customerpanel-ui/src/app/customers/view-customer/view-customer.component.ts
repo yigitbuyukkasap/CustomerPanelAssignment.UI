@@ -1,9 +1,9 @@
 import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y/input-modality/input-modality-detector';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AddressService } from 'src/app/address/address.service';
-import { UpdateCustomerRequest } from 'src/app/models/api-models/update-customer-request.model';
 import { Customer } from 'src/app/models/ui-models/customer.model';
 import { CustomerService } from '../customer.service';
 
@@ -30,6 +30,8 @@ export class ViewCustomerComponent implements OnInit {
   isNewCustomer = false;
   header = '';
   displayImageUrl = '';
+
+  @ViewChild('customerDetailsForm') customerDetailsForm?: NgForm;
 
   constructor(
     private readonly customerService: CustomerService,
@@ -82,22 +84,24 @@ export class ViewCustomerComponent implements OnInit {
   }
 
   onUpdate(): void {
-    this.customerService
-      .updateCustomer(this.customer.id, this.customer)
-      .subscribe(
-        (r) => {
-          this.snackbar.open(
-            'Musteri basarili sekilde guncelendi.',
-            undefined,
-            { duration: 2000 }
-          );
-        },
-        (err) => {
-          this.snackbar.open('Musteri guncelleme basarisiz.', undefined, {
-            duration: 2000,
-          });
-        }
-      );
+    if (this.customerDetailsForm?.form.valid) {
+      this.customerService
+        .updateCustomer(this.customer.id, this.customer)
+        .subscribe(
+          (r) => {
+            this.snackbar.open(
+              'Musteri basarili sekilde guncelendi.',
+              undefined,
+              { duration: 2000 }
+            );
+          },
+          (err) => {
+            this.snackbar.open('Musteri guncelleme basarisiz.', undefined, {
+              duration: 2000,
+            });
+          }
+        );
+    }
   }
   onDelete(): void {
     this.customerService.deleteCustomer(this.customer.id).subscribe(
@@ -115,28 +119,30 @@ export class ViewCustomerComponent implements OnInit {
   }
 
   onAdd(): void {
-    this.customerService.addCustomer(this.customer).subscribe(
-      (r) => {
-        this.snackbar.open('Musteri Basarili Sekilde Eklendi', undefined, {
-          duration: 2000,
-          verticalPosition: 'top',
-        });
-        setTimeout(() => this.router.navigateByUrl(`customer/${r.id}`), 2000);
-      },
-      (err) => {
-        this.snackbar.open(
-          'Musteri Ekleme Basarisiz Hata : Lutfen Bos Alanlari Dogru Sekilde Doldurunuz ',
-          undefined,
-          {
+    if (this.customerDetailsForm?.form.valid) {
+      this.customerService.addCustomer(this.customer).subscribe(
+        (r) => {
+          this.snackbar.open('Musteri Basarili Sekilde Eklendi', undefined, {
             duration: 2000,
             verticalPosition: 'top',
-          }
-        );
-      }
-    );
+          });
+          setTimeout(() => this.router.navigateByUrl(`customer/${r.id}`), 2000);
+        },
+        (err) => {
+          this.snackbar.open(
+            'Musteri Ekleme Basarisiz Hata : Lutfen Bos Alanlari Dogru Sekilde Doldurunuz ',
+            undefined,
+            {
+              duration: 2000,
+              verticalPosition: 'top',
+            }
+          );
+        }
+      );
+    }
   }
 
-   uploadImage(event: any): void {
+  uploadImage(event: any): void {
     if (this.customerId) {
       const file: File = event.target.files[0];
       this.customerService.uploadImage(this.customer.id, file).subscribe(
@@ -154,7 +160,9 @@ export class ViewCustomerComponent implements OnInit {
   }
   private setImage(): void {
     if (this.customer.imageUrl) {
-      this.displayImageUrl = this.customerService.getImagePath(this.customer.imageUrl);
+      this.displayImageUrl = this.customerService.getImagePath(
+        this.customer.imageUrl
+      );
     } else {
       this.displayImageUrl = '/assets/images.png';
     }
