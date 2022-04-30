@@ -1,0 +1,67 @@
+<div class="page-header">
+  <div class="container">
+    <h1>Calisanlar</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row end-xs mt-1">
+    <div class="col-xs-12">
+      <input type="text" class="search-input" placeholder="Calisan Ara"
+        [(ngModel)]="filterString"
+        (keyup)="filterEmployee()">
+        <a routerLink="/employee/add" mat-raised-button color="primary" class="ml-1">Yeni Musteri Ekle</a>
+    </div>
+  </div>
+  <div class="mt-1 mat-elevation-z8">
+    <table mat-table matSort [dataSource]="dataSource" class="">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Ad </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- lastname Column -->
+      <ng-container matColumnDef="lastname">
+        <th mat-header-cell *matHeaderCellDef> Soyad </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+      </ng-container>
+
+      <!-- PhoneNumber Column -->
+      <ng-container matColumnDef="phoneNumber">
+        <th mat-header-cell *matHeaderCellDef> Telefon Numarasi </th>
+        <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+      </ng-container>
+
+      <!-- email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> E Mail </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element">
+          <a [routerLink]="['/employee', element.id]"  color="primary" mat-raised-button>Git
+            <mat-icon color="">edit</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page">
+    </mat-paginator>
+
+  </div>
+</div>

@@ -4,29 +4,31 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Customer } from '../models/ui-models/customer.model';
-import { CustomerService } from './customer.service';
+import { Employee } from 'src/app/models/api-models/employee.model';
+import { CustomerService } from '../customers/customer.service';
+import { EmployeeService } from './employee.service';
 
 @Component({
-  selector: 'app-customers',
-  templateUrl: './customers.component.html',
-  styleUrls: ['./customers.component.css'],
+  selector: 'app-employee',
+  templateUrl: './employee.component.html',
+  styleUrls: ['./employee.component.css']
 })
-export class CustomersComponent implements OnInit {
-  customers: Customer[] = [];
+export class EmployeeComponent implements OnInit {
+  employee: Employee[] = [];
 
-  displayedColumns: string[] = ['name', 'description', 'phoneNumber', 'edit'];
-  dataSource: MatTableDataSource<Customer> = new MatTableDataSource<Customer>();
+  displayedColumns: string[] = ['name', 'lastname', 'phoneNumber', 'email','edit'];
+  dataSource: MatTableDataSource<Employee> = new MatTableDataSource<Employee>();
   @ViewChild(MatPaginator) matPaginator!: MatPaginator;
   @ViewChild(MatSort) matSort!: MatSort;
   filterString = '';
   message = 'Giris Yapmadiniz';
 
-  constructor(
-    private customerService: CustomerService,
+
+
+  constructor(private employeeService: EmployeeService,
     private http: HttpClient,
-    private snackbar: MatSnackBar
-  ) {}
+    private customerService: CustomerService,
+    private snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.http.get('api/Customer/GetAll').subscribe(
@@ -39,10 +41,10 @@ export class CustomersComponent implements OnInit {
     );
 
     // Fetch The Customers
-    this.customerService.getAllCustomers().subscribe(
+    this.employeeService.getAllEmployee().subscribe(
       (successResponse) => {
-        this.customers = successResponse;
-        this.dataSource = new MatTableDataSource<Customer>(this.customers);
+        this.employee = successResponse;
+        this.dataSource = new MatTableDataSource<Employee>(this.employee);
 
         if (this.matPaginator) this.dataSource.paginator = this.matPaginator;
         if (this.matSort) this.dataSource.sort = this.matSort;
@@ -54,8 +56,7 @@ export class CustomersComponent implements OnInit {
         })
     );
   }
-
-  filterCustomers() {
+  filterEmployee() {
     this.dataSource.filter = this.filterString.trim().toLowerCase();
   }
 }

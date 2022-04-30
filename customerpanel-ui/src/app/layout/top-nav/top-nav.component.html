@@ -4,6 +4,7 @@
       <mat-icon>face</mat-icon>
     </a>
     <a routerLink="/customers" mat-raised-button class="ml-1" *ngIf="auth">Musteriler</a>
+    <a routerLink="/employee" mat-raised-button class="ml-1" *ngIf="auth">Calisanlar</a>
     <a routerLink="/login" mat-raised-button class="ml-1" *ngIf="!auth">Giris Yap</a>
     <a routerLink="/register" mat-raised-button class="ml-1" *ngIf="!auth">Uye Ol</a>
     <a routerLink="/login" mat-raised-button class="ml-1" color="warn" style="float: right;margin-top:10px;" (click)="logOut()" *ngIf="auth">Cikis Yap</a>

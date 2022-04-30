@@ -56,6 +56,8 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ViewCustomerComponent } from './customers/view-customer/view-customer.component';
 import { AuthGuard } from './guard/auth.guard';
+import { ViewEmployeeComponent } from './employee/view-employee/view-employee/view-employee.component';
+import { EmployeeComponent } from './employee/employee.component';
 
 export function tokenGetter(){
   return localStorage.getItem('customerpanel_ui');
@@ -68,7 +70,9 @@ export function tokenGetter(){
     CustomersComponent,
     LoginComponent,
     RegisterComponent,
-    ViewCustomerComponent
+    ViewCustomerComponent,
+    EmployeeComponent,
+    ViewEmployeeComponent
   ],
   imports: [
     FormsModule,
